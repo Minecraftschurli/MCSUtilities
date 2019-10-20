@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class DarkGlassBlock extends StainedGlassBlock {
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
+
     public DarkGlassBlock(Properties properties) {
         super(DyeColor.BLACK, properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(ENABLED, true));
@@ -37,10 +38,13 @@ public class DarkGlassBlock extends StainedGlassBlock {
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        worldIn.setBlockState(pos, state.with(ENABLED, !(worldIn.isBlockPowered(fromPos) || worldIn.isBlockPowered(pos) || !isEnabled(worldIn, fromPos))));
+        worldIn.setBlockState(pos, state.with(ENABLED, isEnabled(worldIn, pos, fromPos)));
     }
 
-    private boolean isEnabled(World worldIn, BlockPos fromPos) {
+    private boolean isEnabled(World worldIn, BlockPos pos, BlockPos fromPos) {
+        if (worldIn.isBlockPowered(fromPos) || worldIn.isBlockPowered(pos)) {
+            return false;
+        }
         if (worldIn.getBlockState(fromPos).getBlock() instanceof DarkGlassBlock){
             return worldIn.getBlockState(fromPos).get(ENABLED);
         }
@@ -50,7 +54,7 @@ public class DarkGlassBlock extends StainedGlassBlock {
     @Override
     public int getOpacity(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         if (state.get(ENABLED)) {
-            return 15;
+            return worldIn.getMaxLightLevel();
         }
         return super.getOpacity(state, worldIn, pos);
     }
