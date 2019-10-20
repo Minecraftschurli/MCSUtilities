@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+
+[[mods]]
+    modId="mcsutilities"
+    version="${file.jarVersion}"
+    displayName="MCSUtilities"
+    authors="Minecraftschurli"
+    description=''''''
+
+[[dependencies.mcsutilities]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mcsutilities]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28,)"
+    ordering="NONE"
+    side="BOTH"
+
+#[[dependencies.mcsutilities]]
+#    modId="mcslib"
+#    mandatory=true
+#    versionRange="ANY"
+#    ordering="BEFORE"
+#    side="BOTH"

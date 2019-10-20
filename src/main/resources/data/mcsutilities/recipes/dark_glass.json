@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "_"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:black_carpet"
+    },
+    "_": {
+      "tag": "forge:glass/black"
+    }
+  },
+  "result": {
+    "item": "minecraft:gray_banner"
+  }
+}
