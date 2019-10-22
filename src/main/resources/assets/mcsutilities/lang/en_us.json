@@ -1,4 +1,8 @@
 {
-  "desc.dark_glass": "Blocks any light from passing through.\nPower any connected Dark Glass to turn of.",
-  "block.mcsutilities.dark_glass": "Dark Glass"
+  "desc.dark_glass": "Blocks any light from passing through.",
+  "desc.dark_glass.toggleable": "Power any connected Dark Glass to turn of.",
+  "block.mcsutilities.iron_dark_glass": "Dark Glass",
+  "block.mcsutilities.gold_dark_glass": "Conductive Dark Glass",
+  "block.mcsutilities.gold_metallic_sand": "Metallic Sand",
+  "block.mcsutilities.iron_metallic_sand": "Conductive Metallic Sand"
 }

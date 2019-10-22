@@ -10,12 +10,16 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
-version = modVersion
+version = "${minecraft_version}-${modVersion}"
 group = modGroup
 archivesBaseName = modBaseName
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -72,7 +76,7 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'mcslib', '--all', '--output', file('src/generated/resources/')
+            args '--mod', archivesBaseName, '--all', '--output', file('src/generated/resources/')
 
             mods {
                 mcsutilities {
@@ -89,5 +93,19 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compile project(':MCSLib')
+    // compile project(':MCSLib')
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": "${mod_name}",
+                "Specification-Vendor": "${modGroup}",
+                "Specification-Version": "${minecraft_version}",
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${modVersion}",
+                "Implementation-Vendor" :"${modGroup}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }

@@ -23,25 +23,29 @@ import java.util.List;
  * @author Minecraftschurli
  * @version 2019-10-20
  */
+@SuppressWarnings("deprecation")
 public class DarkGlassBlock extends StainedGlassBlock {
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
+    private final boolean toggleable;
 
-    public DarkGlassBlock(Properties properties) {
+    public DarkGlassBlock(Properties properties, boolean toggleable) {
         super(DyeColor.BLACK, properties);
+        this.toggleable = toggleable;
         this.setDefaultState(this.stateContainer.getBaseState().with(ENABLED, true));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void fillStateContainer(@Nonnull StateContainer.Builder<Block, BlockState> builder) {
         builder.add(ENABLED);
     }
 
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        worldIn.setBlockState(pos, state.with(ENABLED, isEnabled(worldIn, pos, fromPos)));
+    public void neighborChanged(@Nonnull BlockState state, @Nonnull World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        if (toggleable)
+            worldIn.setBlockState(pos, state.with(ENABLED, isEnabled(worldIn, pos, fromPos)));
     }
 
-    private boolean isEnabled(World worldIn, BlockPos pos, BlockPos fromPos) {
+    private boolean isEnabled(@Nonnull World worldIn, BlockPos pos, BlockPos fromPos) {
         if (worldIn.isBlockPowered(fromPos) || worldIn.isBlockPowered(pos)) {
             return false;
         }
@@ -52,7 +56,7 @@ public class DarkGlassBlock extends StainedGlassBlock {
     }
 
     @Override
-    public int getOpacity(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+    public int getOpacity(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         if (state.get(ENABLED)) {
             return worldIn.getMaxLightLevel();
         }
@@ -69,5 +73,7 @@ public class DarkGlassBlock extends StainedGlassBlock {
     public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslationTextComponent("desc.dark_glass").setStyle(new Style().setColor(TextFormatting.GRAY)));
+        if (toggleable)
+            tooltip.add(new TranslationTextComponent("desc.dark_glass.toggleable").setStyle(new Style().setColor(TextFormatting.GRAY)));
     }
 }
