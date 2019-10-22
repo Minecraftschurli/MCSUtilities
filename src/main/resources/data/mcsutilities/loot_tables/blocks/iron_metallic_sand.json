@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:iron_metallic_sand"
+          "name": "mcsutilities:iron_metallic_sand"
         }
       ],
       "conditions": [
