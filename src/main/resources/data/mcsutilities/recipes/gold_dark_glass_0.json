@@ -1,9 +1,9 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:blasting",
   "ingredient": {
     "item": "mcsutilities:gold_metallic_sand"
   },
   "result": "mcsutilities:gold_dark_glass",
-  "experience": 0.1,
-  "cookingtime": 400
+  "experience": 0.0,
+  "cookingtime": 200
 }

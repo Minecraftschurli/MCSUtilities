@@ -48,6 +48,9 @@ minecraft {
                 mcsutilities {
                     source sourceSets.main
                 }
+                mcslib {
+                    source project(':MCSLib').sourceSets.main
+                }
             }
         }
 
@@ -63,6 +66,9 @@ minecraft {
             mods {
                 mcsutilities {
                     source sourceSets.main
+                }
+                mcslib {
+                    source project(':MCSLib').sourceSets.main
                 }
             }
         }
@@ -82,6 +88,9 @@ minecraft {
                 mcsutilities {
                     source sourceSets.main
                 }
+                mcslib {
+                    source project(':MCSLib').sourceSets.main
+                }
             }
         }
     }
@@ -93,7 +102,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // compile project(':MCSLib')
+    compile project(':MCSLib')
 }
 
 jar {

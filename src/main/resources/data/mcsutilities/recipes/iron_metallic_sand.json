@@ -1,16 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "X#X",
-    "#X#",
-    "X#X"
+    "XY",
+    "YX"
   ],
   "key": {
-    "#": [
-      {
-        "tag": "forge:sand"
-      }
-    ],
+    "Y": {
+      "tag": "forge:sand"
+    },
     "X": {
       "tag": "forge:nuggets/iron"
     }
