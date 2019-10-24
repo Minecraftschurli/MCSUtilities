@@ -1,6 +1,6 @@
 MCSUtilities
 ==================
-Is a small mod that adds a few utilities
+A small mod that adds a few utilities
 
 Features
 ------------------
